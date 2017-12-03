@@ -2,13 +2,15 @@ package com.logos.blackJack.terminalVersion;
 
 import java.util.Scanner;
 
-public class BlackJack {
+public class GameRANNER {
 
     /**
-     * This metod run terminal version of game
+     * This metod run terminal version of game Black Jack
      * @param args
      */
     public static void main(String[] args) {
+        Player player;
+        Shoe playingShoe;
 
         Scanner scanner = new Scanner(System.in);
 
@@ -27,10 +29,10 @@ public class BlackJack {
             }
         }
 
-        Player player = new Player(playerName, playerMoney);
+        player = new Player(playerName, playerMoney);
 
         //playingShoe will be the deck the dealer holds
-        Shoe playingShoe = new Shoe();
+        playingShoe = new Shoe();
         playingShoe.generating52Cards();
         playingShoe.shuffle();
 
