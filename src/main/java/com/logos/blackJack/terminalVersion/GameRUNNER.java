@@ -2,7 +2,7 @@ package com.logos.blackJack.terminalVersion;
 
 import java.util.Scanner;
 
-public class GameRANNER {
+public class GameRUNNER {
 
     /**
      * This metod run terminal version of game Black Jack
