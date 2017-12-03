@@ -20,7 +20,9 @@ public class Shoe {
         }
     }
 
-    // creating a random shoe (card/value)
+    /**
+     * creating a random shoe (card/value)
+     */
     public void shuffle() {
         ArrayList<Card> shuffledCards = new ArrayList<Card>();
         Random random = new Random();

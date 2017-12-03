@@ -4,6 +4,10 @@ import java.util.Scanner;
 
 public class BlackJack {
 
+    /**
+     * This metod run terminal version of game
+     * @param args
+     */
     public static void main(String[] args) {
 
         Scanner scanner = new Scanner(System.in);
