@@ -29,7 +29,7 @@ public class Shoe {
 
         int randomCardIndex = 0;
 
-        for (Card card : cards) {
+        for (int i = 0; i < cards.size(); i++) {
             randomCardIndex = random.nextInt((this.cards.size() - 1 - 0) + 1) + 0;
             shuffledCards.add(this.cards.get(randomCardIndex));
             this.cards.remove(randomCardIndex);
