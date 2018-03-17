@@ -7,8 +7,6 @@ public class GameRUNNER {
     /**
      * This metod run terminal version of game Black Jack
      *
-     * User has only one chanse.
-     * The game will be finished when player has no money
      * @param args
      */
     public static void main(String[] args) {
