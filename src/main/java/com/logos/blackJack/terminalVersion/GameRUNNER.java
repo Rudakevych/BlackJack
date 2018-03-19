@@ -5,8 +5,6 @@ import org.apache.log4j.Logger;
 import java.util.Scanner;
 
 public class GameRUNNER {
-    final static Logger logger = Logger.getLogger(GameRUNNER.class);
-
 
     /**
      * This metod run terminal version of game Black Jack
@@ -33,9 +31,8 @@ public class GameRUNNER {
                     String playerMoneyUserInput = scanner.next();
                     playerMoney = Integer.parseInt(playerMoneyUserInput);
                 } catch (NumberFormatException e) {
-                    System.out.println(">>> We don't use coins!");
-                    System.out.println(">>> Value is not an integer number. Please, enter an integer number. [example: 80 or 100000]");
-                    logger.error("User enter incorrect number" + e);
+                    System.out.println("INFO: We don't use coins!");
+                    System.out.println("INFO: Value is not an integer number. Please, enter an integer number. [example: 80 or 100000]");
                 }
             }
 
@@ -58,12 +55,12 @@ public class GameRUNNER {
                         String playerBetUserInput = scanner.next();
                         playerBet = Integer.parseInt(playerBetUserInput);
                         if (playerBet > playerMoney || playerBet <= 0) {
-                            System.out.println(">>> Sorry, man. You cannot bet more than you have.");
+                            System.out.println("INFO: Sorry, man. You cannot bet more than you have. Enter correct number, please!");
                             playerBet = 0;
                         }
                     } catch (NumberFormatException x) {
-                        System.out.println(">>> We don't use coins!");
-                        System.out.println(">>> Value is not an integer number. Please, enter an integer number. [example: 80 or 100500]");
+                        System.out.println("INFO: We don't use coins!");
+                        System.out.println("INFO: Value is not an integer number. Please, enter an integer number. [example: 80 or 100500]");
 
                     }
                 }
@@ -95,7 +92,7 @@ public class GameRUNNER {
                             String hitOrStandChoiseUserInput = scanner.next();
                             hitOrStandChoise = Integer.parseInt(hitOrStandChoiseUserInput);
                         } catch (NumberFormatException e) {
-                            System.out.println(" >>> Please, press button [1] to Hit or [2] to Stand <<<");
+                            System.out.println("INFO: Please, press button [1] to Hit or [2] to Stand <<<");
                         }
                     }
 
@@ -170,16 +167,18 @@ public class GameRUNNER {
 
             /* Checking what user want - continue or exit */
             System.out.println("Do you want to play one more time?");
+            System.out.println("Enter [start] for continue OR enter [exit] for crying");
             boolean isStartOrExit = false;
             String input = "";
             while (!isStartOrExit) {
-                System.out.println("Enter [start] for continue OR enter [exit] for crying");
                 input = scanner.nextLine();
                 if (input.equalsIgnoreCase("exit")) {
                     isStartOrExit = true;
                     exit = "exit";
                 } else if (input.equalsIgnoreCase("start")) {
                     isStartOrExit = true;
+                } else {
+                    System.out.println("INFO: Please, enter [start] OR [exit]");
                 }
             }
 
