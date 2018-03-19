@@ -1,8 +1,12 @@
 package com.logos.blackJack.terminalVersion;
 
+import org.apache.log4j.Logger;
+
 import java.util.Scanner;
 
 public class GameRUNNER {
+    final static Logger logger = Logger.getLogger(GameRUNNER.class);
+
 
     /**
      * This metod run terminal version of game Black Jack
@@ -31,6 +35,7 @@ public class GameRUNNER {
                 } catch (NumberFormatException e) {
                     System.out.println(">>> We don't use coins!");
                     System.out.println(">>> Value is not an integer number. Please, enter an integer number. [example: 80 or 100000]");
+                    logger.error("User enter incorrect number" + e);
                 }
             }
 
@@ -59,6 +64,7 @@ public class GameRUNNER {
                     } catch (NumberFormatException x) {
                         System.out.println(">>> We don't use coins!");
                         System.out.println(">>> Value is not an integer number. Please, enter an integer number. [example: 80 or 100500]");
+
                     }
                 }
 
