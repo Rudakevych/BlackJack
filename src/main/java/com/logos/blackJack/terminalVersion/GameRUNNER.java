@@ -181,7 +181,7 @@ public class GameRUNNER {
                 //Close Scanner
                 scanner.close();
                 //Game is over
-                System.out.println("GAME OVER!");
+                System.out.println("INFO: GAME OVER!");
                 System.out.println("See you soon, dude!");
             }
         }
