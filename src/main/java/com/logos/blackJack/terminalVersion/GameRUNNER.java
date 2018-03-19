@@ -44,6 +44,7 @@ public class GameRUNNER {
             Shoe playerCards = new Shoe();
             Shoe dealerCards = new Shoe();
 
+            // player bet
             while (playerMoney > 0) {
                 int playerBet = 0;
                 System.out.println("<You have [$" + playerMoney + "]. How much would you like to bet for now?>");
@@ -71,6 +72,7 @@ public class GameRUNNER {
                 dealerCards.giveACardFromShoe(playingShoe);
                 dealerCards.giveACardFromShoe(playingShoe);
 
+
                 while (true) {
                     // player cards
                     System.out.println("> Your cards:" + playerCards.toString());
@@ -79,6 +81,7 @@ public class GameRUNNER {
                     // dealer card
                     System.out.println("> Dealer cards: " + dealerCards.getCardFromShoe(0).toString() + " and one card is hidden");
 
+                    // player's next step - Hit or Stand
                     int hitOrStandChoise = 0;
                     while (hitOrStandChoise != 1 && hitOrStandChoise != 2) {
                         System.out.println(">>> Would you like to [1]Hit or [2]Stand");
@@ -92,6 +95,7 @@ public class GameRUNNER {
 
                     // if player hit
                     if (hitOrStandChoise == 1) {
+                        System.out.println("INFO: Your choice is HIT.");
                         playerCards.giveACardFromShoe(playingShoe);
                         System.out.println("> You give a card from shoe at:" + playerCards.getCardFromShoe(playerCards.shoeSize() - 1).toString());
                         //Bust if they go over 21
@@ -105,6 +109,7 @@ public class GameRUNNER {
 
                     // if player stand
                     if (hitOrStandChoise == 2) {
+                        System.out.println("INFO: Your choice is STAND.");
                         break;
                     }
                 }
@@ -157,12 +162,20 @@ public class GameRUNNER {
                 System.out.println(" >>> End of Hand <<<  ");
             }
 
+            /* Checking what user want - continue or exit */
             System.out.println("Do you want to play one more time?");
-            String startOrExit = "";
-//            while (!startOrExit.equalsIgnoreCase("start") || !startOrExit.equalsIgnoreCase("exit")) {
-                    System.out.println("Enter [start] for continue OR enter [exit] for crying");
-                    exit = scanner.next();
-//            }
+            boolean isStartOrExit = false;
+            String input = "";
+            while (!isStartOrExit) {
+                System.out.println("Enter [start] for continue OR enter [exit] for crying");
+                input = scanner.nextLine();
+                if (input.equalsIgnoreCase("exit")) {
+                    isStartOrExit = true;
+                    exit = "exit";
+                } else if (input.equalsIgnoreCase("start")) {
+                    isStartOrExit = true;
+                }
+            }
 
             if (exit.equalsIgnoreCase("exit")) {
                 //Close Scanner
@@ -174,4 +187,3 @@ public class GameRUNNER {
         }
     }
 }
-
