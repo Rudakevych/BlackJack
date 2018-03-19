@@ -1,18 +1,22 @@
 package com.logos.blackJack.terminalVersion;
 
+import org.apache.log4j.Logger;
+
 import java.util.Scanner;
 
 public class GameRUNNER {
+    final static Logger logger = Logger.getLogger(GameRUNNER.class);
 
     /**
      * This metod run terminal version of game Black Jack
      *
-     * @param args
+     * @param args arruments of main method
      */
     public static void main(String[] args) {
         Player player;
         Shoe playingShoe;
 
+        // "show must go on" - player can enjoy game many times
         String exit = "start";
         while (exit.equalsIgnoreCase("start")) {
 
@@ -21,7 +25,6 @@ public class GameRUNNER {
             System.out.println(">>> Hi! What is your name? <<<");
             String playerName = scanner.next();
 
-//		Boolean greaterThanZero = false;
             int playerMoney = 0;
             while (playerMoney <= 0) {
                 System.out.println("> Hi, " + playerName + "! <What is your bet? [example: 80 or 5]");
@@ -29,7 +32,9 @@ public class GameRUNNER {
                     String playerMoneyUserInput = scanner.next();
                     playerMoney = Integer.parseInt(playerMoneyUserInput);
                 } catch (NumberFormatException e) {
-                    System.out.println(">>> Value is not a number. Please, enter a numbers. [example: 80 or 50.48]");
+                    System.out.println("INFO: We don't use coins!");
+                    System.out.println("INFO: Value is not an integer number. Please, enter an integer number. [example: 80 or 100000]");
+                    logger.info(e);
                 }
             }
 
@@ -37,14 +42,14 @@ public class GameRUNNER {
 
             //playingShoe will be the deck the dealer holds
             playingShoe = new Shoe();
-            playingShoe.generating52Cards();
-            playingShoe.shuffle();
+            playingShoe.generating52Cards(); // generating shoe
+            playingShoe.shuffle(); // randomize shoe
 
             Shoe playerCards = new Shoe();
             Shoe dealerCards = new Shoe();
 
+            // player bet
             while (playerMoney > 0) {
-
                 int playerBet = 0;
                 System.out.println("<You have [$" + playerMoney + "]. How much would you like to bet for now?>");
                 while (playerBet == 0) {
@@ -52,11 +57,13 @@ public class GameRUNNER {
                         String playerBetUserInput = scanner.next();
                         playerBet = Integer.parseInt(playerBetUserInput);
                         if (playerBet > playerMoney || playerBet <= 0) {
-                            System.out.println(">>> Sorry, man. You cannot bet more than you have.");
+                            System.out.println("INFO: Sorry, man. You cannot bet more than you have. Enter correct number, please!");
                             playerBet = 0;
                         }
-                    } catch (NumberFormatException x) {
-                        System.out.println(">>> Value is not a number. Please, enter a numbers. [example: 80 or 50.48]");
+                    } catch (NumberFormatException ex) {
+                        System.out.println("INFO: We don't use coins!");
+                        System.out.println("INFO: Value is not an integer number. Please, enter an integer number. [example: 80 or 100500]");
+                        logger.info(ex);
                     }
                 }
 
@@ -70,6 +77,7 @@ public class GameRUNNER {
                 dealerCards.giveACardFromShoe(playingShoe);
                 dealerCards.giveACardFromShoe(playingShoe);
 
+
                 while (true) {
                     // player cards
                     System.out.println("> Your cards:" + playerCards.toString());
@@ -78,13 +86,22 @@ public class GameRUNNER {
                     // dealer card
                     System.out.println("> Dealer cards: " + dealerCards.getCardFromShoe(0).toString() + " and one card is hidden");
 
-                    System.out.println(">>> Would you like to [1]Hit or [2]Stand");
-                    System.out.println("Press button [1] to Hit or [2] to Stand");
-                    String hitOrStandChoiseUserInput = scanner.next();
-                    int hitOrStandChoise = Integer.parseInt(hitOrStandChoiseUserInput);
+                    // player's next step - Hit or Stand
+                    int hitOrStandChoise = 0;
+                    while (hitOrStandChoise != 1 && hitOrStandChoise != 2) {
+                        System.out.println(">>> Would you like to [1]Hit or [2]Stand");
+                        try {
+                            String hitOrStandChoiseUserInput = scanner.next();
+                            hitOrStandChoise = Integer.parseInt(hitOrStandChoiseUserInput);
+                        } catch (NumberFormatException e) {
+                            System.out.println("INFO: Please, press button [1] to Hit or [2] to Stand <<<");
+                            logger.info(e);
+                        }
+                    }
 
                     // if player hit
                     if (hitOrStandChoise == 1) {
+                        System.out.println("INFO: Your choice is HIT.");
                         playerCards.giveACardFromShoe(playingShoe);
                         System.out.println("> You give a card from shoe at:" + playerCards.getCardFromShoe(playerCards.shoeSize() - 1).toString());
                         //Bust if they go over 21
@@ -98,6 +115,7 @@ public class GameRUNNER {
 
                     // if player stand
                     if (hitOrStandChoise == 2) {
+                        System.out.println("INFO: Your choice is STAND.");
                         break;
                     }
                 }
@@ -150,17 +168,30 @@ public class GameRUNNER {
                 System.out.println(" >>> End of Hand <<<  ");
             }
 
+            /* Checking what user want - continue or exit */
             System.out.println("Do you want to play one more time?");
-            System.out.println("Press [start] for continue OR press [exit] for crying");
-            exit = scanner.next();
+            System.out.println("Enter [start] for continue OR enter [exit] for crying");
+            boolean isStartOrExit = false;
+            String input = "";
+            while (!isStartOrExit) {
+                input = scanner.nextLine();
+                if (input.equalsIgnoreCase("exit")) {
+                    isStartOrExit = true;
+                    exit = "exit";
+                } else if (input.equalsIgnoreCase("start")) {
+                    isStartOrExit = true;
+                } else {
+                    System.out.println("INFO: Please, enter [start] OR [exit]");
+                }
+            }
 
-            if(exit.equalsIgnoreCase("exit")) {
+            if (exit.equalsIgnoreCase("exit")) {
                 //Close Scanner
                 scanner.close();
                 //Game is over
-                System.out.println("GAME OVER!");
+                System.out.println("INFO: GAME OVER!");
+                System.out.println("See you soon, dude!");
             }
         }
     }
 }
-

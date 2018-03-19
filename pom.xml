@@ -10,10 +10,18 @@
 
     <!-- add from https://mvnrepository.com/artifact/junit/junit -->
     <dependencies>
+        <!-- JUnit Testing framework -->
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
             <version>4.12</version> <!-- ${junit.version>}-->
+        </dependency>
+        <!-- TestNG framework-->
+        <dependency>
+            <groupId>org.testng</groupId>
+            <artifactId>testng</artifactId>
+            <version>6.11</version>
+            <scope>test</scope>
         </dependency>
         <!-- hamcrest-all - Added for exeptions -->
         <dependency>
@@ -22,9 +30,13 @@
             <version>1.3</version>
             <scope>test</scope>
         </dependency>
-
+        <!-- Logging -->
+        <dependency>
+            <groupId>log4j</groupId>
+            <artifactId>log4j</artifactId>
+            <version>1.2.17</version>
+        </dependency>
     </dependencies>
-
     <build>
         <plugins>
             <plugin>
@@ -32,7 +44,6 @@
                 <artifactId>maven-surefire-report-plugin</artifactId>
                 <version>2.20.1</version>
             </plugin>
-
             <!-- Tell maven to compile using Java 8 -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
@@ -48,7 +59,6 @@
                     <showWarnings>true</showWarnings>
                     <failOnError>true</failOnError>
                 </configuration>
-
                 <dependencies>
                     <!-- https://mvnrepository.com/artifact/org.apache.commons/commons-lang3 -->
                     <dependency>
@@ -66,6 +76,4 @@
             </plugin>
         </plugins>
     </build>
-
-
 </project>

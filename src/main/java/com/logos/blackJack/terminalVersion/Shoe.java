@@ -8,10 +8,31 @@ public class Shoe {
     private ArrayList<Card> cards;
 
     public Shoe() {
-        this.cards = new ArrayList<Card>();
+        this.cards = new ArrayList<>();
     }
 
-    // generating 52 cards (Shoe)
+    public Card getCardFromShoe(int i) {
+        return this.cards.get(i);
+    }
+
+    /**
+     * Simple toString method
+     *
+     * @return list of Card
+     */
+    public String toString() {
+        String cardList = "";
+        int i = 0;
+        for (Card card : this.cards) {
+            cardList = cardList + "\n" + card.toString();
+            i++;
+        }
+        return cardList;
+    }
+
+    /**
+     * Generating 52 cards (Shoe)
+     */
     public void generating52Cards() {
         for (Suit suiteOfCards : Suit.values()) {
             for (Value valueOfCards : Value.values()) {
@@ -21,10 +42,10 @@ public class Shoe {
     }
 
     /**
-     * creating a random shoe (card/value)
+     * Creating a random shoe (card/value)
      */
     public void shuffle() {
-        ArrayList<Card> shuffledCards = new ArrayList<Card>();
+        ArrayList<Card> shuffledCards = new ArrayList<>();
         Random random = new Random();
 
         int randomCardIndex = 0;
@@ -41,10 +62,6 @@ public class Shoe {
         this.cards.remove(i);
     }
 
-    public Card getCardFromShoe(int i) {
-        return this.cards.get(i);
-    }
-
     public void addCardToShoe(Card addedCard) {
         this.cards.add(addedCard);
     }
@@ -54,16 +71,6 @@ public class Shoe {
         this.cards.add(ourShoe.getCardFromShoe(0));
         // remove card from old Shoe
         ourShoe.removeCardFromTheShoe(0);
-    }
-
-    public String toString() {
-        String cardList = "";
-        int i = 0;
-        for (Card card : this.cards) {
-            cardList = cardList + "\n" + card.toString();
-            i++;
-        }
-        return cardList;
     }
 
     public void moveAllToShoe(Shoe cardList) {
@@ -80,7 +87,11 @@ public class Shoe {
         return this.cards.size();
     }
 
-    // what value has a this shoe
+    /**
+     * What value this shoe has
+     *
+     * @return
+     */
     public int cardsValue() {
         int cardValue = 0;
         int acesNumbers = 0;
@@ -129,13 +140,14 @@ public class Shoe {
             }
         }
 
-        // Set aces value (1 or 11)
+        /**
+         * Set aces value (1 or 11)
+         */
         for (int i = 0; i < acesNumbers; i++) {
-            if (cardValue > 10) { // if total card value more than 10 - ace will have value 1
+            if (cardValue > 10) // if total card value more than 10 - ace will have value 1
                 cardValue = cardValue + 1;
-            } else { // ace will have value 11
+            else // ace will have value 11
                 cardValue = cardValue + 11;
-            }
         }
         return cardValue;
     }
