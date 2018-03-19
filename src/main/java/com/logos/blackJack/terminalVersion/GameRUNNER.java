@@ -5,6 +5,7 @@ import org.apache.log4j.Logger;
 import java.util.Scanner;
 
 public class GameRUNNER {
+    final static Logger logger = Logger.getLogger(GameRUNNER.class);
 
     /**
      * This metod run terminal version of game Black Jack
@@ -33,6 +34,7 @@ public class GameRUNNER {
                 } catch (NumberFormatException e) {
                     System.out.println("INFO: We don't use coins!");
                     System.out.println("INFO: Value is not an integer number. Please, enter an integer number. [example: 80 or 100000]");
+                    logger.info(e);
                 }
             }
 
@@ -58,10 +60,10 @@ public class GameRUNNER {
                             System.out.println("INFO: Sorry, man. You cannot bet more than you have. Enter correct number, please!");
                             playerBet = 0;
                         }
-                    } catch (NumberFormatException x) {
+                    } catch (NumberFormatException ex) {
                         System.out.println("INFO: We don't use coins!");
                         System.out.println("INFO: Value is not an integer number. Please, enter an integer number. [example: 80 or 100500]");
-
+                        logger.info(ex);
                     }
                 }
 
@@ -93,6 +95,7 @@ public class GameRUNNER {
                             hitOrStandChoise = Integer.parseInt(hitOrStandChoiseUserInput);
                         } catch (NumberFormatException e) {
                             System.out.println("INFO: Please, press button [1] to Hit or [2] to Stand <<<");
+                            logger.info(e);
                         }
                     }
 
