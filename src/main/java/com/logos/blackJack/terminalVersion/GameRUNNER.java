@@ -27,7 +27,7 @@ public class GameRUNNER {
 
             int playerMoney = 0;
             while (playerMoney <= 0) {
-                System.out.println("> Hi, " + playerName + "! <What is your bet? [example: 80 or 5]");
+                System.out.println("> Hi, " + playerName + "! How much money are you prepared to earn today? ;)");
                 try {
                     String playerMoneyUserInput = scanner.next();
                     playerMoney = Integer.parseInt(playerMoneyUserInput);
