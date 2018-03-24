@@ -8,3 +8,4 @@
 2018-03-24 10:11:31 INFO  GameRUNNER:37 - java.lang.NumberFormatException: For input string: "234234234234"
 2018-03-24 11:06:25 INFO  GameRUNNER:36 - java.lang.NumberFormatException: For input string: "цукцку"
 2018-03-24 11:07:25 INFO  GameRUNNER:101 - java.lang.NumberFormatException: For input string: "цй"
+2018-03-24 11:33:44 INFO  GameRUNNER:36 - java.lang.NumberFormatException: For input string: "werwer"
