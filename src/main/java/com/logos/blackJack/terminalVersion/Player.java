@@ -7,8 +7,9 @@ public class Player {
 
     public Player() { }
 
-    public Player(String playersName, int playerMoney) {
+    public Player(String playersName, int playerCash) {
         this.playersName = playersName;
+        this.playerCash = playerCash;
     }
 
     public String getPlayersName() {
@@ -19,7 +20,7 @@ public class Player {
         this.playersName = playersName;
     }
 
-    public double getPlayerCash() {
+    public int getPlayerCash() {
         return playerCash;
     }
 
