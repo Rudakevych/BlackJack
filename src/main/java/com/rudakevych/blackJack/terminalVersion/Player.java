@@ -1,11 +1,12 @@
-package com.logos.blackJack.terminalVersion;
+package com.rudakevych.blackJack.terminalVersion;
 
 public class Player {
 
     private String playersName;
     private int playerCash;
 
-    public Player() { }
+    public Player() {
+    }
 
     public Player(String playersName, int playerCash) {
         this.playersName = playersName;

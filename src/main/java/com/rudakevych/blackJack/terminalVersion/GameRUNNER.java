@@ -1,4 +1,4 @@
-package com.logos.blackJack.terminalVersion;
+package com.rudakevych.blackJack.terminalVersion;
 
 import org.apache.log4j.Logger;
 

@@ -1,4 +1,4 @@
-package com.logos.blackJack.terminalVersion;
+package com.rudakevych.blackJack.terminalVersion;
 
 import java.util.ArrayList;
 import java.util.Random;
