@@ -3,9 +3,11 @@ package com.logos.blackJack.terminalVersion;
 public class Player {
 
     private String playersName;
-    private double playerCash;
+    private int playerCash;
 
-    public Player(String playersName, double playerMoney) {
+    public Player() { }
+
+    public Player(String playersName, int playerMoney) {
         this.playersName = playersName;
     }
 
@@ -21,7 +23,7 @@ public class Player {
         return playerCash;
     }
 
-    public void setPlayerCash(double playerCash) {
+    public void setPlayerCash(int playerCash) {
         this.playerCash = playerCash;
     }
 }

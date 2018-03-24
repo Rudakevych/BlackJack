@@ -13,7 +13,6 @@ public class GameRUNNER {
      * @param args arruments of main method
      */
     public static void main(String[] args) {
-        Player player;
         Shoe playingShoe;
 
         // "show must go on" - player can enjoy game many times
@@ -32,8 +31,8 @@ public class GameRUNNER {
                     String playerMoneyUserInput = scanner.next();
                     playerMoney = Integer.parseInt(playerMoneyUserInput);
                 } catch (NumberFormatException e) {
-                    System.out.println("INFO: We don't use coins!");
-                    System.out.println("INFO: Value is not an integer number. Please, enter an integer number. [example: 80 or 100000]");
+                    System.out.println("***********************************");
+                    System.out.println("INFO: Value is not an integer number. Please, enter an integer number. [min - 1 / max - 2,000,000,000] We don't use coins!");
                     logger.info(e);
                 }
             }
@@ -51,6 +50,7 @@ public class GameRUNNER {
             // player bet
             while (playerMoney > 0) {
                 int playerBet = 0;
+                System.out.println("============================================");
                 System.out.println("<You have [$" + playerMoney + "]. How much would you like to bet for now?>");
                 while (playerBet == 0) {
                     try {
@@ -61,8 +61,8 @@ public class GameRUNNER {
                             playerBet = 0;
                         }
                     } catch (NumberFormatException ex) {
-                        System.out.println("INFO: We don't use coins!");
-                        System.out.println("INFO: Value is not an integer number. Please, enter an integer number. [example: 80 or 100500]");
+                        System.out.println("***********************************");
+                        System.out.println("INFO: Value is not an integer number. Please, enter an integer number. [example: 80 or 100000] We don't use coins!");
                         logger.info(ex);
                     }
                 }
@@ -79,16 +79,21 @@ public class GameRUNNER {
 
 
                 while (true) {
+                    System.out.println("^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^");
                     // player cards
-                    System.out.println("> Your cards:" + playerCards.toString());
-                    System.out.println("=> Your cards total value: " + playerCards.cardsValue());
+                    System.out.println(">> Your cards: " + playerCards.toString());
+                    System.out.println(">> Your cards total value: " + playerCards.cardsValue());
 
+                    System.out.println("~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~");
                     // dealer card
-                    System.out.println("> Dealer cards: " + dealerCards.getCardFromShoe(0).toString() + " and one card is hidden");
+                    System.out.println(">> Dealer cards: ");
+                    System.out.println(dealerCards.getCardFromShoe(0).toString());
+                    System.out.println("...and one card is hidden");
 
                     // player's next step - Hit or Stand
                     int hitOrStandChoise = 0;
                     while (hitOrStandChoise != 1 && hitOrStandChoise != 2) {
+                        System.out.println("$ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $");
                         System.out.println(">>> Would you like to [1]Hit or [2]Stand");
                         try {
                             String hitOrStandChoiseUserInput = scanner.next();
@@ -103,10 +108,12 @@ public class GameRUNNER {
                     if (hitOrStandChoise == 1) {
                         System.out.println("INFO: Your choice is HIT.");
                         playerCards.giveACardFromShoe(playingShoe);
-                        System.out.println("> You give a card from shoe at:" + playerCards.getCardFromShoe(playerCards.shoeSize() - 1).toString());
+                        System.out.println("^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^");
+                        System.out.println(">> You give a card from shoe at:");
+                        System.out.println(playerCards.getCardFromShoe(playerCards.shoeSize() - 1).toString());
                         //Bust if they go over 21
                         if (playerCards.cardsValue() > 21) {
-                            System.out.println(">>> Bust. Currently valued at: " + playerCards.cardsValue());
+                            System.out.println("INFO: >>> Bust. Currently valued at: " + playerCards.cardsValue());
                             playerMoney = playerMoney - playerBet;
                             endRound = true;
                             break;
@@ -121,11 +128,12 @@ public class GameRUNNER {
                 }
 
                 //Reveal Dealer Cards
-                System.out.println("> Dealer Cards:" + dealerCards.toString());
+                System.out.println(">> Dealer Cards:" + dealerCards.toString());
 
                 // if dealer has more points than player
                 if ((dealerCards.cardsValue() > playerCards.cardsValue()) && endRound == false) {
-                    System.out.println(">>> Sorry, but Dealer beats you " + dealerCards.cardsValue() + " to " + playerCards.cardsValue());
+                    System.out.println("~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~");
+                    System.out.println("INFO: >>> Sorry, but Dealer beats you " + dealerCards.cardsValue() + " to " + playerCards.cardsValue());
                     playerMoney = playerMoney - playerBet;
                     endRound = true;
                 }
@@ -133,42 +141,47 @@ public class GameRUNNER {
                 //Dealer hits at 16 stands at 17
                 while ((dealerCards.cardsValue() < 17) && endRound == false) {
                     dealerCards.giveACardFromShoe(playingShoe);
-                    System.out.println("> Dealer draws: " + dealerCards.getCardFromShoe(dealerCards.shoeSize() - 1).toString());
+                    System.out.println("~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~");
+                    System.out.println("INFO: >> Dealer draws:");
+                    System.out.println(dealerCards.getCardFromShoe(dealerCards.shoeSize() - 1).toString());
                 }
 
                 //Display value of dealer
-                System.out.println("> Dealers hand value: " + dealerCards.cardsValue());
+                System.out.println(">> Dealers hand value: " + dealerCards.cardsValue());
 
                 //Determine if dealer busted
                 if ((dealerCards.cardsValue() > 21) && endRound == false) {
-                    System.out.println("=>>>> Dealer Busts. You win! Congratulations!!! You're the best!");
+                    System.out.println("$ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $");
+                    System.out.println("INFO: >>> Dealer Busts. You win! Congratulations!!! You're the best! <<<");
                     playerMoney = playerMoney + playerBet;
                     endRound = true;
                 }
 
-                // determine if push
+                // determine if push - dealer and players has the same cards value
                 if ((dealerCards.cardsValue() == playerCards.cardsValue()) && endRound == false) {
-                    System.out.println(">>Push.");
+                    System.out.println("INFO: >>> Push.");
                     endRound = true;
                 }
 
                 //Determine if player wins
                 if ((playerCards.cardsValue() > dealerCards.cardsValue()) && endRound == false) {
-                    System.out.println(">>You win the hand.");
+                    System.out.println("$ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $");
+                    System.out.println("INFO: >>> You win the hand.");
                     playerMoney = playerMoney + playerBet;
                     endRound = true;
                 } else if (endRound == false) { //dealer wins
-                    System.out.println("Sorry, but Dealer wins.");
+                    System.out.println("INFO: Sorry, but Dealer wins.");
                     playerMoney = playerMoney - playerBet;
                 }
 
                 //End of hand - put cards back in deck
                 playerCards.moveAllToShoe(playingShoe);
                 dealerCards.moveAllToShoe(playingShoe);
-                System.out.println(" >>> End of Hand <<<  ");
+                System.out.println("INFO: >>> End of Hand <<<  ");
             }
 
             /* Checking what user want - continue or exit */
+            System.out.println("$ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $");
             System.out.println("Do you want to play one more time?");
             System.out.println("Enter [start] for continue OR enter [exit] for crying");
             boolean isStartOrExit = false;
@@ -186,11 +199,11 @@ public class GameRUNNER {
             }
 
             if (exit.equalsIgnoreCase("exit")) {
-                //Close Scanner
-                scanner.close();
                 //Game is over
                 System.out.println("INFO: GAME OVER!");
-                System.out.println("See you soon, dude!");
+                System.out.println(">>> See you soon, dude! <<< ");
+                //Close Scanner
+                scanner.close();
             }
         }
     }
