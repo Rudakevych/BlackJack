@@ -13,8 +13,8 @@ public class GameRUNNER {
      * @param args arruments of main method
      */
     public static void main(String[] args) {
-        Player player;
         Shoe playingShoe;
+        Player player = new Player("", 0); // create new Player
 
         // "show must go on" - player can enjoy game many times
         String exit = "start";
@@ -23,22 +23,19 @@ public class GameRUNNER {
             Scanner scanner = new Scanner(System.in);
 
             System.out.println(">>> Hi! What is your name? <<<");
-            String playerName = scanner.next();
+            player.setPlayersName(scanner.next());
 
-            int playerMoney = 0;
-            while (playerMoney <= 0) {
-                System.out.println("> Hi, " + playerName + "! How much money are you prepared to earn today? ;)");
+            while (player.getPlayerCash() <= 0) {
+                System.out.println("> Hi, " + player.getPlayersName() + "! How much money are you prepared to earn today? ;)");
                 try {
                     String playerMoneyUserInput = scanner.next();
-                    playerMoney = Integer.parseInt(playerMoneyUserInput);
+                    player.setPlayerCash(Integer.parseInt(playerMoneyUserInput));
                 } catch (NumberFormatException e) {
                     System.out.println("***********************************");
                     System.out.println("INFO: Value is not an integer number. Please, enter an integer number. [min - 1 / max - 2,000,000,000] We don't use coins!");
                     logger.info(e);
                 }
             }
-
-            player = new Player(playerName, playerMoney);
 
             //playingShoe will be the deck the dealer holds
             playingShoe = new Shoe();
@@ -49,15 +46,15 @@ public class GameRUNNER {
             Shoe dealerCards = new Shoe();
 
             // player bet
-            while (playerMoney > 0) {
+            while (player.getPlayerCash() > 0) {
                 int playerBet = 0;
                 System.out.println("============================================");
-                System.out.println("<You have [$" + playerMoney + "]. How much would you like to bet for now?>");
+                System.out.println("<You have [$" + player.getPlayerCash() + "]. How much would you like to bet for now?>");
                 while (playerBet == 0) {
                     try {
                         String playerBetUserInput = scanner.next();
                         playerBet = Integer.parseInt(playerBetUserInput);
-                        if (playerBet > playerMoney || playerBet <= 0) {
+                        if (playerBet > player.getPlayerCash() || playerBet <= 0) {
                             System.out.println("INFO: Sorry, man. You cannot bet more than you have. Enter correct number, please!");
                             playerBet = 0;
                         }
@@ -115,7 +112,7 @@ public class GameRUNNER {
                         //Bust if they go over 21
                         if (playerCards.cardsValue() > 21) {
                             System.out.println("INFO: >>> Bust. Currently valued at: " + playerCards.cardsValue());
-                            playerMoney = playerMoney - playerBet;
+                            player.setPlayerCash(player.getPlayerCash() - playerBet);
                             endRound = true;
                             break;
                         }
@@ -135,7 +132,7 @@ public class GameRUNNER {
                 if ((dealerCards.cardsValue() > playerCards.cardsValue()) && endRound == false) {
                     System.out.println("~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~");
                     System.out.println("INFO: >>> Sorry, but Dealer beats you " + dealerCards.cardsValue() + " to " + playerCards.cardsValue());
-                    playerMoney = playerMoney - playerBet;
+                    player.setPlayerCash(player.getPlayerCash() - playerBet);
                     endRound = true;
                 }
 
@@ -154,7 +151,7 @@ public class GameRUNNER {
                 if ((dealerCards.cardsValue() > 21) && endRound == false) {
                     System.out.println("$ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $");
                     System.out.println("INFO: >>> Dealer Busts. You win! Congratulations!!! You're the best! <<<");
-                    playerMoney = playerMoney + playerBet;
+                    player.setPlayerCash((player.getPlayerCash() + playerBet));
                     endRound = true;
                 }
 
@@ -168,11 +165,11 @@ public class GameRUNNER {
                 if ((playerCards.cardsValue() > dealerCards.cardsValue()) && endRound == false) {
                     System.out.println("$ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $");
                     System.out.println("INFO: >>> You win the hand.");
-                    playerMoney = playerMoney + playerBet;
+                    player.setPlayerCash(player.getPlayerCash() + playerBet);
                     endRound = true;
                 } else if (endRound == false) { //dealer wins
                     System.out.println("INFO: Sorry, but Dealer wins.");
-                    playerMoney = playerMoney - playerBet;
+                    player.setPlayerCash(player.getPlayerCash() - playerBet);
                 }
 
                 //End of hand - put cards back in deck
@@ -202,7 +199,7 @@ public class GameRUNNER {
             if (exit.equalsIgnoreCase("exit")) {
                 //Game is over
                 System.out.println("INFO: GAME OVER!");
-                System.out.println(">>> See you soon, dude! <<< ");
+                System.out.println(">>> See you soon, " + player.getPlayersName() + "! <<< ");
                 //Close Scanner
                 scanner.close();
             }
