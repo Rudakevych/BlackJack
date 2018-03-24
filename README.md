@@ -1,6 +1,6 @@
 Welcome to the BlackJack game!
 
-Run Main method in class com.logos.blackJack.terminalVersion.GameRUNNER to start the game.
+Run "main" method in class com.logos.blackJack.terminalVersion.GameRUNNER to start the game.
 
 Rules:
 
