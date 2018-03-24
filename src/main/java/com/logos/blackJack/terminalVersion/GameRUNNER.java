@@ -13,6 +13,7 @@ public class GameRUNNER {
      * @param args arruments of main method
      */
     public static void main(String[] args) {
+        Player player;
         Shoe playingShoe;
 
         // "show must go on" - player can enjoy game many times
