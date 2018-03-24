@@ -1,2 +1,8 @@
 2018-03-19 17:25:35 ERROR GameRUNNER:38 - User enter incorrect numberjava.lang.NumberFormatException: For input string: "asd"
 2018-03-19 17:29:27 ERROR GameRUNNER:38 - User enter incorrect numberjava.lang.NumberFormatException: For input string: "asd"
+2018-03-24 09:25:04 INFO  GameRUNNER:37 - java.lang.NumberFormatException: For input string: "werr"
+2018-03-24 09:36:12 INFO  GameRUNNER:66 - java.lang.NumberFormatException: For input string: "asd"
+2018-03-24 10:06:23 INFO  GameRUNNER:37 - java.lang.NumberFormatException: For input string: "1231231231231233123"
+2018-03-24 10:07:10 INFO  GameRUNNER:37 - java.lang.NumberFormatException: For input string: "1231312312312312312332"
+2018-03-24 10:10:15 INFO  GameRUNNER:37 - java.lang.NumberFormatException: For input string: "234234234234234234"
+2018-03-24 10:11:31 INFO  GameRUNNER:37 - java.lang.NumberFormatException: For input string: "234234234234"
