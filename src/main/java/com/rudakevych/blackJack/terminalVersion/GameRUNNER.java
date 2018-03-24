@@ -75,7 +75,6 @@ public class GameRUNNER {
                 dealerCards.giveACardFromShoe(playingShoe);
                 dealerCards.giveACardFromShoe(playingShoe);
 
-
                 while (true) {
                     System.out.println("^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^");
                     // player cards
